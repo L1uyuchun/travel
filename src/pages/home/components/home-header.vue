@@ -6,7 +6,9 @@
           <span class="iconfont iconCss">&#xe62a;</span>
           输入城市/景点/游玩/主题
         </div>
-        <div class="rightPlace"><span>{{city}}</span><i class="iconfont">&#xe600;</i></div>
+        <router-link to="/city" name="div" class="rightPlace">
+           <span>{{city}}</span><i class="iconfont">&#xe600;</i>
+        </router-link>
       </div>
     </div>
 </template>
@@ -55,6 +57,7 @@
       float: right
       line-height $headerHeight
       text-align center
+      color #ffffff
       span
         display inline-block
         vertical-align top
