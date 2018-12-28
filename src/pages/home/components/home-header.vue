@@ -6,7 +6,7 @@
           <span class="iconfont iconCss">&#xe62a;</span>
           输入城市/景点/游玩/主题
         </div>
-        <div class="rightPlace"><span>三亚</span><i class="iconfont">&#xe600;</i></div>
+        <div class="rightPlace"><span>{{city}}</span><i class="iconfont">&#xe600;</i></div>
       </div>
     </div>
 </template>
@@ -14,6 +14,7 @@
 <script>
 	export default {
 		name:'HomeHeader',
+    props: ['city'],
 		data() {
 			return {
 				

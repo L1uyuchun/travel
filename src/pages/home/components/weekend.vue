@@ -1,11 +1,11 @@
 <template>
   <div class="recommend">
     <p class="love">周末去哪儿</p>
-    <div class="point border-bottom" v-for="item in 5">
-      <img src="~@/assets/img/homeImg/week.jpg" alt="" class="pointImg">
+    <div class="point border-bottom" v-for="item in weekendList" :key="item.id">
+      <img :src="item.imgUrl" alt="" class="pointImg">
       <div class="rightText">
-        <p class="title">成都欢乐谷</p>
-        <p class="intro">超级旋转过山车刺激到让你怀疑人生超级旋转过山车刺激到让你怀疑人生</p>
+        <p class="title">{{item.title}}</p>
+        <p class="intro">{{item.desc}}</p>
       </div>
     </div>
   </div>
@@ -13,7 +13,10 @@
 
 <script>
   export default {
-    name: "weekend"
+    name: "weekend",
+    props:{
+      "weekendList":Array
+    }
   }
 </script>
 
@@ -36,14 +39,12 @@
 
         .title
           ellipse()
-          height 0
-          overflow hidden
-          padding-bottom 0.7rem
+          font-size 0.3rem
+          title-intro()
           line-height 1rem
         .intro
-          height 0
-          overflow hidden
-          padding-bottom 0.7rem
+          font-size 0.2rem
+          title-intro()
           line-height 0.5rem
           color #666
           ellipse()

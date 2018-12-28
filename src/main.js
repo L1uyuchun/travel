@@ -8,6 +8,9 @@ import 'styles/border.css' //解决移动端一像素的问题
 import FastClick from 'fastclick'  //解决点击事件300ms延迟的问题
 import 'styles/iconfont/iconfont.css'
 import VueAwesomeSwiper from 'vue-awesome-swiper'//使用轮播组件swiper
+import axios from 'axios'
+
+Vue.prototype.axios=axios
 
 // require styles
 import 'swiper/dist/css/swiper.css'
