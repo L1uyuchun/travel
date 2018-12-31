@@ -19,7 +19,8 @@ export default {
   data() {
     return {
       alphaList: ['A', 'B', 'C', 'D', 'E', 'F', 'G', 'H', 'I', 'J', 'K', 'L', 'M', 'N', 'O', 'P', 'Q', 'R', 'S', 'T', 'U', 'V', 'W', 'X', 'Y', 'Z'],
-      isTouch:false
+      isTouch:false,
+      timer:null//touchemove函数节流优化
     }
   },
   methods: {
@@ -31,10 +32,19 @@ export default {
     },
     touchMove (e) {
       //h获取A字母距离顶端的距离，再获取滑动过程中距离顶端的距离。除以字母元素的高度，就是当前鼠标所处的元素
-      const startY=this.$refs['A'][0].offsetTop;
-      const endY=e.touches[0].clientY-78;
-      const moveLetter=Math.floor((endY-startY)/15);
-      this.$emit('change',this.alphaList[moveLetter]);
+      if (this.isTouch) {
+        if(this.timer) {
+          clearTimeout(this.timer);
+        }
+        this.timer=setTimeout( () => {
+          const startY=this.$refs['A'][0].offsetTop;
+          const endY=e.touches[0].clientY-78;
+          const moveLetter=Math.floor((endY-startY)/15);
+          this.$emit('change',this.alphaList[moveLetter]);
+        },16)
+
+      }
+
 
     },
     tontouchEnd () {
