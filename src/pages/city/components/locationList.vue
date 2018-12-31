@@ -4,61 +4,20 @@
       <div class="area">
         <p class="title">热门城市</p>
         <ul class="city-box">
-          <li class="city-name border">北京</li>
-          <li class="city-name border">北京</li>
-          <li class="city-name border">北京</li>
-          <li class="city-name border">北京</li>
-          <li class="city-name border">北京</li>
+          <li class="city-name border"
+              v-for="item in hotCities"
+              :key="item.id"
+          >{{item.name}}</li>
+
         </ul>
       </div>
-      <div class="area">
-        <p class="title">A</p>
+      <div class="area" v-for="(item ,key) in cities" :key="key">
+        <p class="title" :ref="key">{{key}}</p>
         <ul class="item-box">
-          <li class="item border-bottom">北京</li>
-          <li class="item border-bottom">北京</li>
-          <li class="item border-bottom">北京</li>
-          <li class="item border-bottom">北京</li>
-          <li class="item border-bottom">北京</li>
-        </ul>
-      </div>
-      <div class="area">
-        <p class="title">A</p>
-        <ul class="item-box">
-          <li class="item border-bottom">北京</li>
-          <li class="item border-bottom">北京</li>
-          <li class="item border-bottom">北京</li>
-          <li class="item border-bottom">北京</li>
-          <li class="item border-bottom">北京</li>
-        </ul>
-      </div>
-      <div class="area">
-        <p class="title">A</p>
-        <ul class="item-box">
-          <li class="item border-bottom">北京</li>
-          <li class="item border-bottom">北京</li>
-          <li class="item border-bottom">北京</li>
-          <li class="item border-bottom">北京</li>
-          <li class="item border-bottom">北京</li>
-        </ul>
-      </div>
-      <div class="area">
-        <p class="title">A</p>
-        <ul class="item-box">
-          <li class="item border-bottom">北京</li>
-          <li class="item border-bottom">北京</li>
-          <li class="item border-bottom">北京</li>
-          <li class="item border-bottom">北京</li>
-          <li class="item border-bottom">北京</li>
-        </ul>
-      </div>
-      <div class="area">
-        <p class="title">A</p>
-        <ul class="item-box">
-          <li class="item border-bottom">北京</li>
-          <li class="item border-bottom">北京</li>
-          <li class="item border-bottom">北京</li>
-          <li class="item border-bottom">北京</li>
-          <li class="item border-bottom">北京</li>
+          <li class="item border-bottom"
+              v-for="item1 in item"
+              :key="item1.id"
+          >{{item1.name}}</li>
         </ul>
       </div>
     </div>
@@ -70,10 +29,20 @@
 
   export default {
     name: "locationList",
+    props:["cities","hotCities",'letter'],
     mounted() {
       this.$nextTick(() => {
         this.scroll = new BScroll(this.$refs.wrapper, {})
       })
+    },
+    watch:{
+      letter() {
+        console.log(this.letter);
+        const element=this.$refs[this.letter];//通过ref获取到的元素不是标准的dom元素
+        if(element){
+          this.scroll.scrollToElement(element[0],500);//需要传入dom元素对象或者选择器字符串
+        }
+      }
     }
   }
 </script>
