@@ -2,11 +2,18 @@
   <div class="locationList wrapper" ref="wrapper">
     <div class="content">
       <div class="area">
+        <p class="title">当前城市</p>
+        <ul class="city-box">
+          <li class="city-name border">{{currentCity}}</li>
+        </ul>
+      </div>
+      <div class="area">
         <p class="title">热门城市</p>
         <ul class="city-box">
           <li class="city-name border"
               v-for="item in hotCities"
               :key="item.id"
+              @click="selectPlace(item.name)"
           >{{item.name}}</li>
 
         </ul>
@@ -17,6 +24,7 @@
           <li class="item border-bottom"
               v-for="item1 in item"
               :key="item1.id"
+              @click="selectPlace(item1.name)"
           >{{item1.name}}</li>
         </ul>
       </div>
@@ -26,15 +34,29 @@
 
 <script>
   import BScroll from 'better-scroll'
+  import { mapState,mapMutations } from 'vuex'
 
   export default {
     name: "locationList",
     props:["cities","hotCities",'letter'],
+    computed: {
+      ...mapState({
+        'currentCity':"city"
+      })
+    },
+    methods:{
+      ...mapMutations(['changePlace']),
+      selectPlace(place) {
+        this.changePlace(place);
+        this.$router.push('/');
+      }
+    },
     mounted() {
       this.$nextTick(() => {
         this.scroll = new BScroll(this.$refs.wrapper, {})
       })
     },
+
     watch:{
       letter() {
         console.log(this.letter);
